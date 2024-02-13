@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <style type="text/css">
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        ul,
+        li {
+            list-style: none;
+        }
+
+        a {
+            color: inherit;
+            text-decoration: none;
+        }
+
+        body {
+            overflow-x: hidden;
+        }
+
+
+        .img_rolling {
+            width: 300%;
+            position: absolute;
+            top: 0;
+            left: 0;
+            border: 1px solid red;
+            display: flex;
+            justify-content: space-between;
+            animation: move 30s linear infinite forwards;
+        }
+
+        .img_rolling li {
+            border: 1px solid green;
+            padding: 10px 20px;
+        }
+
+        @keyframes move {
+            0% {
+                transform: translateX(0);
+            }
+
+            50% {
+                transform: translateX(-100%);
+            }
+
+            50.1% {
+                transform: translateX(100%);
+            }
+
+            100% {
+                transform: translateX(0);
+            }
+        }
+
+
+        .box {
+            margin: 100px;
+        }
+    </style>
+
+</head>
+
+<body>
+    <ul class="img_rolling">
+        <li><a href="#">1111</a></li>
+        <li><a href="#">2222</a></li>
+        <li><a href="#">33333333333333</a></li>
+        <li><a href="#">44444444</a></li>
+        <li><a href="#">55555</a></li>
+    </ul>
+
+    <marquee class="box">
+        Lorem ipsum dolor sit, amet consectetur adipisicing elit. Nulla hic exercitationem officiis error! Magni vel
+        fugit laborum maxime tempora soluta alias sunt atque porro odit. Quia eum similique eveniet repellendus.
+    </marquee>
+
+    <marquee class="box" scrollamount="5" direction="right" behavior="alternate">
+        Lorem ipsum dolor sit, amet consectetur adipisicing elit. Nulla hic exercitationem officiis error! Magni vel
+        fugit laborum maxime tempora soluta alias sunt atque porro odit. Quia eum similique eveniet repellendus.
+    </marquee>
+</body>
+
+</html>

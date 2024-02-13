@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <style type="text/css">
+        *{margin: 0;padding: 0;box-sizing: border-box;}
+        html, body{
+            width: 100%;
+            height: 100%;
+        }
+
+        .container{
+            display: flex;
+            height: 100%;
+            justify-content: center;
+            align-items: center;
+        }
+
+        ul, li{
+            list-style: none;
+        }
+
+        .rollingbanner{
+            width: 100%;
+            height: 100px;
+        }
+
+        .rollingbanner a{
+            text-decoration: none;
+            color: #444;
+        }
+
+        .rollingbanner .wrap{
+            width: 1200px;
+            height: 100px;
+            margin: 0 auto;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .roller{
+            position: absolute;
+            height: 100%;
+        }
+
+        .roller ul{
+            padding: 10px 0;
+            display: flex;
+            flex-wrap: nowrap;
+            align-items: center;
+
+            /* display: flex;
+
+            flex-wrap: nowrap;
+            flex-direction: row;
+
+            flex-flow: row nowrap; */
+        }
+
+        .roller ul li{
+            padding-right: 30px;
+        }
+
+    </style>
+
+    <script lang="java">
+        var originalID, cloneId
+
+        window.addEventListener("DOMContentLoaded", function(){
+
+    //롤링 배너 복제본 생성
+        let roller=document.querySelector(".roller");
+        roller.id="roller1";
+        
+        let clone=roller.cloneNode(true);
+        clone.id="roller2";
+        document.querySelector(".wrap").appendChild(clone); //부착
+
+        //원본, 복제본 배너  위치 지정
+
+        document.querySelector("#roller1").style.left="0px";
+        document.querySelector("#roller2").style.left=document.querySelector(".roller ul").offsetWidth+"px";
+
+        //클래스 할당
+        roller.classList.add("original");
+        clone.classList.add("clone");
+
+        //인터벌 메서드 애니메이션 생성
+        let rollerWidth=document.querySelector(".roller ul").offsetWidth;
+        let betweenDistance=1;
+
+        //롤링 시작
+        function startRoller(){
+            originalID=window.setInterval(betweenRollCallback, parseInt(1000/100), betweenDistance, document.querySelector("#roller1"));
+            cloneId=window.setInterval(betweenRollCallback, parseInt(1000/100), betweenDistance, document.querySelector("#roller2"));
+        }
+
+        function betweenRollCallback(d, roller){
+            let left=parseInt(roller.style.left);
+            roller.style.left=(left-d)+"px"; //이동
+            //조건부 리셋
+            if(rollerWidth+(left-d)<=0){
+                roller.style.left=rollerWidth+"px";
+            }
+        }
+
+        startRoller(); //롤링 초기화
+
+
+        //롤링정지
+        function stopRoller(){
+            clearInterval(originalID);
+            clearInterval(cloneId);
+        }
+
+        //마우스 호버시 롤링 멈추기, 다시 롤링 되기
+
+        document.getElementById("roller1").addEventListener("mouseover", ()=> {stopRoller()})
+        document.getElementById("roller2").addEventListener("mouseover", ()=> {stopRoller()})
+        document.getElementById("roller1").addEventListener("mouseout", ()=> {startRoller()})
+        document.getElementById("roller2").addEventListener("mouseout", ()=> {startRoller()})
+
+        })
+    </script>
+
+
+
+</head>
+<body>
+    <div class="container">
+        <div class="rollingbanner">
+            <div class="wrap">
+                <div class="roller">
+                    <ul>
+                        <li><a href="#">111111111111111</a></li>
+                        <li><a href="#">aaaaaaaaaaaaaaaaaaaaaaaaaaaaa</a></li>
+                        <li><a href="#">1dwdg222222222222</a></li>
+                        <li><a href="#">gefddfhsfdfsd</a></li>
+                        <li><a href="#">shfhwerjhgfgdxvhthtehgwfdfs</a></li>
+                        <li><a href="#">55624753</a></li>
+                        <li><a href="#">23238735690724525</a></li>
+                        <li><a href="#">dsghfhddddddewwhhw</a></li>
+                        <li><a href="#">gfdqsmbvdjitrs</a></li>
+                        <li><a href="#">2477924512</a></li>
+                    </ul>
+                </div><!-- roller -->
+            </div><!-- wrap -->
+        </div><!-- rollingbanner -->
+    </div><!-- container -->
+</body>
+</html>
